@@ -16,7 +16,7 @@ const app = express();
 // MIDDLEWARE CONFIGURATION
 // ============================================
 app.use(cors({
-  origin: '*',
+  origin: ['https://kaard-farm.vercel.app', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(express.json());

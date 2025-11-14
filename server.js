@@ -15,10 +15,20 @@ const app = express();
 // ============================================
 // MIDDLEWARE CONFIGURATION
 // ============================================
-app.use(cors({
+
+// app.use(cors({
+//   origin: ['https://kaard-farm.vercel.app', 'http://localhost:3000'],
+//   credentials: true
+// }));
+
+const corsOptions = {
   origin: ['https://kaard-farm.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}));
+};
+app.use(cors(corsOptions));
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -16,13 +16,19 @@ const app = express();
 // MIDDLEWARE CONFIGURATION
 // ============================================
 
-// app.use(cors({
-//   origin: ['https://kaard-farm.vercel.app', 'http://localhost:3000'],
-//   credentials: true
-// }));
-
 const corsOptions = {
-  origin: ['https://kaard-farm.vercel.app', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://kaard-farm.vercel.app',
+      'http://localhost:3000'
+    ];
+    // Allow all Vercel preview deployments
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.includes('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
